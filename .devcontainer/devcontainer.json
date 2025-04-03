@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
 	"name": "Go",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"forwardPorts": [8080],
 	"image": "mcr.microsoft.com/devcontainers/go:1.24-bookworm",
 
 	"postCreateCommand": "go version",
