@@ -110,7 +110,7 @@ const epochCluster = new aws.ecs.Cluster("epochCluster", {
 const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
     family: "epochService",
     networkMode: "awsvpc",
-    executionRoleArn: buildConfig.require('taskExecutionRoleArn'),
+    executionRoleArn: buildConfig.requireSecret('taskExecutionRoleArn'),
     requiresCompatibilities: ["FARGATE"],
     memory: "512",
     cpu: "256",
@@ -124,7 +124,7 @@ const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
             protocol: "tcp",
         }],
         repositoryCredentials: {
-            credentialsParameter: buildConfig.require('ghcrCredentials'),
+            credentialsParameter: buildConfig.requireSecret('ghcrCredentials'),
         },
         environment: [
             {
