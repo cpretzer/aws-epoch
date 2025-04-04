@@ -7,11 +7,17 @@
 # Use the local docker to build the image
 .PHONY: build-local
 build-local:
-	@echo "Building for Linux..."
+	@echo "Building for Linux ..."
 	@docker build --platform linux/amd64 -t epoch-time:latest .
 
 # Run the golang tests
 .PHONY: test-epoch-time
 test-epoch-time:
-	@echo "Running tests..."
+	@echo "Running tests ..."
 	@go test -v ./...
+
+# Run the application locally
+.PHONY: run
+run:
+	@echo "Running main.go ..."
+	@LOG_LEVEL=debug go run main.go
