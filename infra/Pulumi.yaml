@@ -1,0 +1,10 @@
+name: epoch-time
+description: AWS deployment for simple API endpoint
+runtime:
+  name: nodejs
+  options:
+    packagemanager: yarn
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-typescript
