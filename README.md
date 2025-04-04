@@ -109,6 +109,24 @@ the infrastructure
 
 You may need to run `pulumi init` once to initialize the pulumi configuration.
 
+## Sending requests
+
+I haven't found an easy way to get the public IP address of the task that
+runs in the ECS Cluster. For now, I use the AWS console to navigate to the ECS
+cluster page, then find the running task and get the public IP.
+
+![Public IP](public-ip.png "Public IP")
+
+There are some AWS CLI commands that require parsing, but I ran out of time to
+get the final command.
+
+First, get the tasks from the cluster:
+`aws ecs describe-services --cluster epochCluster --services epochService`
+
+Then, describe the task: `aws ecs describe-task-definition --task-definition arn:aws:ecs:us-west-2:<account-number>:task-definition/<service-name>:1`
+
+This output will container NetworkAssociations, one of which has the IP address.
+
 ## Appendix A: AWS Permissions
 
 - Built-In Policies
@@ -119,7 +137,7 @@ You may need to run `pulumi init` once to initialize the pulumi configuration.
 
 - Custom Policy
   - ec2:CreateTags
-  - ec2:AllocateAddress 
+  - ec2:AllocateAddress
   - ec2:RevokeSecurityGroupIngress
   - ec2:DeleteInternetGateway
   - ec2:ReleaseAddress
