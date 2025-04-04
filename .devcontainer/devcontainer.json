@@ -2,10 +2,19 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
 	"name": "Go",
+	"containerEnv": {
+		"PULUMI_ACCESS_TOKEN": "${localEnv:PULUMI_ACCESS_TOKEN}",
+		"AWS_ACCESS_KEY_ID": "${localEnv:AWS_ACCESS_KEY_ID}",
+		"AWS_SECRET_ACCESS_KEY": "${localEnv:AWS_SECRET_ACCESS_KEY}",
+		"AWS_REGION": "${localEnv:AWS_REGION}"
+	},
+	"remoteEnv": {
+		"PATH": "${containerEnv:PATH}:/home/vscode/.pulumi/bin"
+	},
 	"forwardPorts": [8080],
 	"image": "mcr.microsoft.com/devcontainers/go:1.24-bookworm",
 
-	"postCreateCommand": "go version",
+	"postCreateCommand": "bin/devcontainer-postcreate.sh",
 	"runArgs": [
 		"--name", "epoch-go"
 	]

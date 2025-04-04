@@ -1,0 +1,6 @@
+config:
+  aws:region: us-west-2
+  pulumi:template: aws-typescript
+  epoch-time:ghcrCredentials: arn:aws:secretsmanager:us-east-1:573450171254:secret:test-secret-9z3L0x
+  epoch-time:serviceCidr: 10.0.20.0/28
+  epoch-time:taskExecutionRoleArn: arn:aws:iam::573450171254:role/ecsTaskExecutionRole
