@@ -106,15 +106,9 @@ const epochCluster = new aws.ecs.Cluster("epochCluster", {
     },
 });
 
-// Create the task definition for the service
-const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
-    family: "epochService",
-    networkMode: "awsvpc",
-    executionRoleArn: buildConfig.requireSecret('taskExecutionRoleArn'),
-    requiresCompatibilities: ["FARGATE"],
-    memory: "512",
-    cpu: "256",
-    containerDefinitions: JSON.stringify([{
+const ghcrCredentials = buildConfig.requireSecret('ghcrCredentials');
+const containerDef = ghcrCredentials.apply(v => {
+    return JSON.stringify([{
         name: "epochService",
         image: `ghcr.io/cpretzer/epoch-time:${imageVersion}`,
         essential: true,
@@ -124,7 +118,7 @@ const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
             protocol: "tcp",
         }],
         repositoryCredentials: {
-            credentialsParameter: buildConfig.requireSecret('ghcrCredentials'),
+            credentialsParameter: v,
         },
         environment: [
             {
@@ -152,7 +146,19 @@ const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
                 value: aws.config.region,
             }
         ],
-    }]),
+    }]);
+});
+
+// console.log(moreCreds);
+// Create the task definition for the service
+const epochTaskDefinition = new aws.ecs.TaskDefinition("epochTaskDefinition", {
+    family: "epochService",
+    networkMode: "awsvpc",
+    executionRoleArn: buildConfig.requireSecret('taskExecutionRoleArn'),
+    requiresCompatibilities: ["FARGATE"],
+    memory: "512",
+    cpu: "256",
+    containerDefinitions: containerDef,
 });
 
 // Create the epoch service in the cluster
