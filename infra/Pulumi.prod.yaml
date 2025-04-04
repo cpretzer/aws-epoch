@@ -2,7 +2,9 @@ config:
   aws:region: us-west-2
   pulumi:template: aws-typescript
   epoch-time:ghcrCredentials:
-    secure: AAABAKoMAkUtcij32RFU+LQgT08qq5EcRKmq+SqWsx9/jKume99Vnd6GhZGgg7+IAiH/5x+9Eb/uqeziUmGvLxBAzIsaISN6Y+3UCC0+j+a5HLBFGeGTduRODofvVJ6F/sbFr6JYwA==
+    secure: AAABABuFB4vs8mAkOLcHMkPpEwNXkrgjwj7WPkKddhTol/5TzRTU+NYxd8tMK37KpH/hV2C3qP2B72hKIgWBnshQ74Rm35DwOzPnuHM3XIkNFDznAf2yzosXNERjNOSB6B/plykBug==
   epoch-time:serviceCidr: 10.0.20.0/28
   epoch-time:taskExecutionRoleArn:
     secure: AAABAM8AxDbWCdrg65SRYNzNCnhR6f3b5+dutpj0SPr861UEE0rDbL9hK/sGMc7HjWgJMJ4Q0xKBXWhUhKa1tw8/dKcq3rwicUrsDb+QTiVX9CM=
+  epoch-time:ghcrKeyArn:
+    secure: AAABABDAul4Y7jKkvgsNNKLnFGtK+lEiakoMkPG351UxRvXs7VC9ihBbWkbMwAjabVerMBQZsQSZg7v7rZX5nRkbTOVoJt+6K2Tf1Vl5YFg=
